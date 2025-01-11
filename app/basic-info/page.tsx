@@ -1,8 +1,8 @@
-'use client'
+'use client';
 
-import React, { useState } from 'react';
+import React, { useState, forwardRef, useImperativeHandle } from 'react';
 
-const Infor = () => {
+const Infor = forwardRef((props, ref) => {
     const logos = [
         { src: '/images/instagram.png', alt: 'Instagram' },
         { src: '/images/Tik Tok.png', alt: 'TikTok' },
@@ -31,6 +31,7 @@ const Infor = () => {
         if (name === 'phoneNumber') setPhoneNumber(value);
         if (name === 'email') setEmail(value);
     };
+
 
     // Validate form fields
     const validate = () => {
@@ -63,13 +64,10 @@ const Infor = () => {
         return isValid;
     };
 
-    // Handle form submission
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        if (validate()) {
-            console.log('Form submitted');
-        }
-    };
+    // Expose the validate method to the parent component
+    useImperativeHandle(ref, () => ({
+        validate,
+    }));
 
     return (
         <div className="mt-8 w-11/12 md:w-9/12 m-auto">
@@ -87,12 +85,11 @@ const Infor = () => {
                 ))}
             </div>
 
-
             <div>
                 <p className="text-[14px]">Or enter manually</p>
             </div>
 
-            <form onSubmit={handleSubmit} className=" space-y-4">
+            <form className="space-y-4">
                 <div>
                     <input
                         placeholder='Full Name'
@@ -107,7 +104,6 @@ const Infor = () => {
                 </div>
 
                 <div>
-
                     <input
                         placeholder='Username'
                         type="text"
@@ -121,7 +117,6 @@ const Infor = () => {
                 </div>
 
                 <div>
-
                     <input
                         placeholder='Phone Number'
                         type="text"
@@ -135,7 +130,6 @@ const Infor = () => {
                 </div>
 
                 <div>
-
                     <input
                         placeholder='Email'
                         type="email"
@@ -150,6 +144,6 @@ const Infor = () => {
             </form>
         </div>
     );
-};
+});
 
 export default Infor;
