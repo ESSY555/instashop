@@ -1,50 +1,93 @@
-'use client'
+'use client';
+
 import React, { useState } from 'react';
 import Infor from './../basic-info/page';
 import StoreDetails from '../create-store-details/page';
 
 const GetStarted = () => {
-    // Track the current progress (which bar is active)
     const [step, setStep] = useState(1);
+    const [inputValue, setInputValue] = useState('');
+    const [error, setError] = useState('');
 
-    // Function to handle continue button click
     const handleContinue = () => {
+        // Validate input on step 1
+        if (step === 1 && inputValue.trim() === '') {
+            setError('Please enter a valid phone number or email');
+            return;
+        }
+        setError('');
+
+        // Handle step navigation
         if (step < 3) {
-            setStep(step + 1); // Move to next step
+            setStep(step + 1);
+        } else {
+            // Use window.location.href for navigation
+            window.location.href = '/create-product';
+        }
+    };
+
+    const handleBack = () => {
+        if (step > 1) {
+            setStep(step - 1);
         }
     };
 
     return (
-        <div className="container md:w-8/12 m-auto mt-8">
-            {/* Progress bar */}
-            <div className="flex mb-6 space-x-2">
+        <div className="container mx-auto mt-8 md:w-2/3">
+            {/* Progress Bar */}
+            <div className="flex mb-6 space-x-2" aria-label="Progress Bar">
                 <div
                     className={`flex-1 h-2 ${step >= 1 ? 'bg-[#8A226F]' : 'bg-gray-300'}`}
-                ></div>
+                    aria-label={`Step 1 ${step >= 1 ? 'completed' : 'not completed'}`}
+                />
                 <div
                     className={`flex-1 h-2 ${step >= 2 ? 'bg-[#8A226F]' : 'bg-gray-300'}`}
-                ></div>
+                    aria-label={`Step 2 ${step >= 2 ? 'completed' : 'not completed'}`}
+                />
                 <div
                     className={`flex-1 h-2 ${step >= 3 ? 'bg-[#8A226F]' : 'bg-gray-300'}`}
-                ></div>
+                    aria-label={`Step 3 ${step >= 3 ? 'completed' : 'not completed'}`}
+                />
             </div>
 
-            {/* Step content */}
+            {/* Step Content */}
             <div className="mb-4">
-                {step === 1 && <div className="">
-                    <p className='font-bold text-[24px]'>Enter your phone number or email to get started</p>
-                    <p className='text-[14px]'>We will send you a verification code for confirmation</p>
-                    <input className='p-3 rounded-lg border w-full mt-8' type="text" placeholder='Enter phone number of email' />
-                </div>}
-
-                {step === 2 && <div className=""><Infor /> </div>}
-                {step === 3 && <div className="mt-4"><StoreDetails /></div>}
+                {step === 1 && (
+                    <div>
+                        <p className="font-bold text-[24px]">
+                            Enter your phone number or email to get started
+                        </p>
+                        <p className="text-[14px]">
+                            We will send you a verification code for confirmation
+                        </p>
+                        <input
+                            className="p-3 rounded-lg border w-full mt-8"
+                            type="text"
+                            placeholder="Enter phone number or email"
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                        />
+                        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+                    </div>
+                )}
+                {step === 2 && <Infor />}
+                {step === 3 && <StoreDetails />}
             </div>
 
-            <div className='mt-8  flex items-center justify-center h-20'>
+            {/* Navigation Buttons */}
+            <div className=" w-full mt-8 flex items-center justify-between">
+                {step > 1 && (
+                    <button
+                        onClick={handleBack}
+                        className="bg-gray-300 px-4 py-2 text-black rounded-full">
+                        Back
+                    </button>
+                )}
                 <button
                     onClick={handleContinue}
-                    className='bg-[#8A226F] p-2 w-full text-white rounded-full'>Continue</button>
+                    className="bg-[#8A226F] px-4 py-2 text-white rounded-full flex-1 ml-4">
+                    Continue
+                </button>
             </div>
         </div>
     );

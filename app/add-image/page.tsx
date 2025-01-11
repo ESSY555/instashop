@@ -1,16 +1,17 @@
 'use client'
 
 import React, { useState } from 'react';
+import DragButton from '../drag-button/page';
 
 const AddImage = () => {
-    // Update the state type to accept either a string (for the image URL) or null
+
     const [image, setImage] = useState<string | null>(null);
 
-    // Handle the file selection
+
     const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (file) {
-            setImage(URL.createObjectURL(file)); // Create a local URL for the selected image
+            setImage(URL.createObjectURL(file)); 
         }
     };
 
@@ -25,6 +26,7 @@ const AddImage = () => {
 
 
             <div className=" text-left mb-5">
+
                 {/* Dropdown Trigger */}
                 <button
                     onClick={toggleNewDropdown}
@@ -33,7 +35,7 @@ const AddImage = () => {
                     aria-expanded={newisOpen}
                     aria-haspopup="true"
                 >
-                    <span className="text-left flex-1 text-[14px]">Product Image</span>
+                    <span className="text-left flex-1 text-[14px] font-bold">Product Image</span>
                     <svg
                         className="h-5 w-5 ml-2"
                         xmlns="http://www.w3.org/2000/svg"
@@ -57,6 +59,7 @@ const AddImage = () => {
                         aria-orientation="vertical"
                         aria-labelledby="menu-button"
                     >
+                        <DragButton />
 
                         <div className="mt-4 pb-5">
                             <input
@@ -66,7 +69,7 @@ const AddImage = () => {
                                 className="hidden"
                                 id="image-upload"
                             />
-                            <label htmlFor="image-upload" className="bg-gray-100 w-full flex rounded-full px-3 py-3 flex gap-2 items-center">
+                            <label htmlFor="image-upload" className="bg-gray-100 w-full flex justify-center rounded-full px-3 py-3 flex gap-2 items-center">
                                 <p className="text-nowrap">Add image</p>
                                 <img src="/images/new-icon.png" alt="Add image icon" />
                             </label>
@@ -81,19 +84,11 @@ const AddImage = () => {
                                 </div>
                             )}
                         </div>
+
+
                     </div>
                 )}
             </div>
-
-
-
-
-
-
-
-
-
-
         </div>
     );
 };

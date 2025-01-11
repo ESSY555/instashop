@@ -1,17 +1,13 @@
-'use client'
+'use client';
 
 import React, { useState } from 'react';
 import BasicDetails from '../basic-details/page';
 import AddImage from '../add-image/page';
 
-
-
 const CreateProduct = () => {
-
-
-
     const [isSelfShippingChecked, setIsSelfShippingChecked] = useState(false);
     const [isInstaShopShippingChecked, setIsInstaShopShippingChecked] = useState(false);
+    const [isOpen, setIsOpen] = useState(false);
 
     const toggleSelfShipping = () => {
         setIsSelfShippingChecked(!isSelfShippingChecked);
@@ -21,17 +17,19 @@ const CreateProduct = () => {
         setIsInstaShopShippingChecked(!isInstaShopShippingChecked);
     };
 
-    const [isOpen, setIsOpen] = useState(false);
-
     const toggleDropdown = () => {
         setIsOpen(!isOpen);
     };
+
+    const handleSave = () => {
+        // Navigate to 'product-edit' page when the save button is clicked
+        window.location.href = '/product-edit';
+    };
+
     return (
         <div className="md:w-5/12 m-auto mb-8">
-
-            <div className='flex justify-between items-center mt-8 '>
+            <div className="flex justify-between items-center mt-8 ">
                 <button className="flex items-center justify-center px-3 py-1 text-sm font-medium bg-white text-gray-500 border rounded-full hover:bg-gray-600 hover:text-white focus:outline-none focus:ring-2 focus:ring-blue-400">
-
                     <p>Draft</p>
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
@@ -45,32 +43,22 @@ const CreateProduct = () => {
                     </svg>
                 </button>
 
-                <p className=' text-[#8A226F] cursor-pointer'>Preview product</p>
-
+                <p className=" text-[#8A226F] cursor-pointer">Preview product</p>
             </div>
 
             <div className="mb-5">
-
                 <BasicDetails />
-
-
-
             </div>
-
 
             <AddImage />
 
-            <div className='border-t border-b pb-5'>
-                <p className='font-bold text-[14px] pt-5'>Inventory variations</p>
+            <div className="border-t border-b pb-5">
+                <p className="font-bold text-[14px] pt-5">Inventory variations</p>
                 <div className="flex items-center gap-2 pt-5">
                     <input type="checkbox" />
                     <p className="text-[14px]">This product is variable; has different colors, sizes, weight, materials, etc.</p>
                 </div>
-
             </div>
-
-
-
 
             <div className=" text-left mt-8">
                 {/* Dropdown Trigger */}
@@ -99,19 +87,13 @@ const CreateProduct = () => {
 
                 {/* Dropdown Menu */}
                 {isOpen && (
-                    <div
-                        className=" w-full mt-2 bg-white focus:outline-none"
-                        role="menu"
-                        aria-orientation="vertical"
-                        aria-labelledby="menu-button"
-                    >
+                    <div className="w-full mt-2 bg-white focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button">
                         <div>
                             {/* Self Shipping Toggle */}
                             <div className="mt-5 flex justify-between">
                                 <p className="text-[12px]">Self shipping</p>
                                 <div
-                                    className={`w-6 h-6 flex items-center justify-center rounded-md cursor-pointer transition-colors ${isSelfShippingChecked ? "bg-[#8A226F]" : "bg-gray-200"
-                                        }`}
+                                    className={`w-6 h-6 flex items-center justify-center rounded-md cursor-pointer transition-colors ${isSelfShippingChecked ? 'bg-[#8A226F]' : 'bg-gray-200'}`}
                                     onClick={toggleSelfShipping}
                                 >
                                     {isSelfShippingChecked && (
@@ -123,11 +105,7 @@ const CreateProduct = () => {
                                             stroke="white"
                                             className="w-4 h-4"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                     )}
                                 </div>
@@ -137,8 +115,7 @@ const CreateProduct = () => {
                             <div className="mt-5 flex justify-between">
                                 <p className="text-[12px]">InstaShop shipping</p>
                                 <div
-                                    className={`w-6 h-6 flex items-center justify-center rounded-md cursor-pointer transition-colors ${isInstaShopShippingChecked ? "bg-[#8A226F]" : "bg-gray-200"
-                                        }`}
+                                    className={`w-6 h-6 flex items-center justify-center rounded-md cursor-pointer transition-colors ${isInstaShopShippingChecked ? 'bg-[#8A226F]' : 'bg-gray-200'}`}
                                     onClick={toggleInstaShopShipping}
                                 >
                                     {isInstaShopShippingChecked && (
@@ -150,11 +127,7 @@ const CreateProduct = () => {
                                             stroke="white"
                                             className="w-4 h-4"
                                         >
-                                            <path
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                                d="M5 13l4 4L19 7"
-                                            />
+                                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
                                         </svg>
                                     )}
                                 </div>
@@ -164,23 +137,13 @@ const CreateProduct = () => {
                 )}
             </div>
 
-
-
-
-
-
-
-
-
-
-
-            <div className='mb-8 border-b pb-12 mt-8'>
+            <div className="mb-8 border-b pb-12 mt-8">
                 <input
-                    placeholder='Inventory stocks'
+                    placeholder="Inventory stocks"
                     type="text"
                     id="fullName"
                     name="fullName"
-                    value=''
+                    value=""
                     className="mt-2 text-gray-300 w-full px-4 py-4 border rounded-lg"
                 />
             </div>
@@ -191,32 +154,13 @@ const CreateProduct = () => {
                     Cancel
                 </button>
 
-
                 {/* Save Button */}
-                <button className="px-4 flex-1 py-2 bg-[#8A226F] text-white rounded-full">
+                <button onClick={handleSave} className="px-4 flex-1 py-2 bg-[#8A226F] text-white rounded-full">
                     Save
                 </button>
             </div>
-
         </div>
     );
 };
 
 export default CreateProduct;
-
-
-
-
-{/* <div className="mt-2">
-    <button className="bg-gray-100 w-full rounded-full px-3 py-3 flex gap-2 items-center">
-        <input
-            type="file"
-            accept="image/*"
-
-            className="hidden"
-            id="image-upload"
-        />
-        <p className="text-nowrap">Add image</p>
-        <img src="/images/new-icon.png" alt="Add image icon" />
-    </button>
-</div>  */}

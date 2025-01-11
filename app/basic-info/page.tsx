@@ -147,13 +147,6 @@ const Infor = () => {
                     />
                     {errors.email && <p className="text-red-500 text-sm">{errors.email}</p>}
                 </div>
-
-                {/* <button
-                    type="submit"
-                    className="mt-12 w-full px-6 py-2 bg-[#8A226F] text-white rounded-md"
-                >
-                    Continue
-                </button> */}
             </form>
         </div>
     );

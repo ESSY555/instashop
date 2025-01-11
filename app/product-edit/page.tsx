@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import BasicDetails from '../basic-details/page';
 import AddImage from '../add-image/page';
+import InventoryVariation from '../components/inventory-variations';
 
 
 
@@ -37,6 +38,9 @@ const EditProduct = () => {
 
     const toggleNewDropdown = () => {
         setOpen(!newisOpen);
+    };
+    const handleSave = () => {
+        window.location.href = '/product-review';
     };
     return (
         <div className="md:w-5/12 m-auto mb-8">
@@ -130,13 +134,31 @@ const EditProduct = () => {
                                 </div>
 
                                 <div>
-                                    <input
-                                        placeholder="Product collection"
-                                        type="text"
-                                        value={productCollection}
-                                        onChange={(e) => setProductCollection(e.target.value)}
-                                        className="mt-2 w-full px-4 py-4 border rounded-lg"
-                                    />
+                                    <div
+                                        className="mt-2 w-full text-gray-500 px-4 py-4 border rounded-lg"
+                                    >
+                                        Product Collection
+
+                                        <div className='flex gap-3 pt-3'>
+                                            <div className='flex rounded-full w-[130px] justify-center gap-2 py-2 text-black px-2 inline-block bg-[rgb(247,247,247)]'>
+                                                <p className='font-bold text-[12px]'>collection</p>
+                                                <img
+                                                    src="../images/xicon.png"
+                                                    alt="Uploaded preview"
+                                                    className="w-5 object-cover rounded-lg"
+                                                />
+                                            </div>
+                                            <div className='flex rounded-full w-[130px] justify-center py-2 gap-2 text-black px-2 inline-block bg-[rgb(247,247,247)]'>
+                                                <p className='font-bold text-[12px]'>Interest</p>
+                                                <img
+                                                    src="../images/xicon.png"
+                                                    alt="Uploaded preview"
+                                                    className=" w-5 object-cover rounded-lg"
+                                                />
+                                            </div>
+                                        </div>
+                                        <p className='text-[12px] pt-2'>Search or create collection</p>
+                                    </div>
                                     <input
                                         placeholder="Inventory stocks"
                                         type="text"
@@ -158,17 +180,16 @@ const EditProduct = () => {
 
             <AddImage />
 
-            <div className='border-t border-b pb-5'>
+
+            <InventoryVariation />
+            {/* <div className='border-t border-b pb-5'>
                 <p className='font-bold text-[14px] pt-5'>Inventory variations</p>
                 <div className="flex items-center gap-2 pt-5">
                     <input type="checkbox" />
                     <p className="text-[14px]">This product is variable; has different colors, sizes, weight, materials, etc.</p>
                 </div>
 
-            </div>
-
-
-
+            </div> */}
 
             <div className=" text-left mt-8">
                 {/* Dropdown Trigger */}
@@ -280,7 +301,7 @@ const EditProduct = () => {
 
 
                 {/* Save Button */}
-                <button className="px-4 flex-1 py-2 bg-[#8A226F] text-white rounded-full">
+                <button onClick={handleSave} className="px-4 flex-1 py-2 bg-[#8A226F] text-white rounded-full">
                     Save
                 </button>
             </div>
